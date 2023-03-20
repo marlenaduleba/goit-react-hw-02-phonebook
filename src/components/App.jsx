@@ -1,32 +1,24 @@
 import { Component } from 'react';
+import Section from './Section/Section';
+import ContactForm from './ContactForm/ContactForm';
+import ContactList from './ContactList/ContactList';
 
 export default class App extends Component {
   state = {
     contacts: [],
-    filter: '',
+    name: '',
   };
 
   render() {
     return (
-      <div>
-        <h1>Phonebook</h1>
-        <form action="">
-          <h2>Name</h2>
-          <input
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-          />
-          <button>Add contact</button>
-        </form>
-        <h2>Contacts</h2>
-        <ul>
-          <li>Rosie Simpson</li>
-          <li>Hermione Kline</li>
-          <li>Eden Clements</li>
-        </ul>
+      <div >
+        <Section title="Phonebook">
+          <ContactForm />
+        </Section>
+
+        <Section title="Contacts">
+          <ContactList />
+        </Section>
       </div>
     );
   }
