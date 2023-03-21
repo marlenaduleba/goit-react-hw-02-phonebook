@@ -1,10 +1,10 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import Section from './Section/Section';
+import Filter from './Filter/Filter';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
-import Filter from './Filter/Filter';
 
-import { nanoid } from 'nanoid';
+import { Notify } from 'notiflix';
 
 export default class App extends Component {
   state = {
@@ -18,28 +18,24 @@ export default class App extends Component {
     filter: '',
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const form = e.currentTarget;
+  onAddContact = contact => {
+    const { contacts } = this.state;
 
-    const contactId = nanoid();
-    const newName = form.elements.name.value;
-    const number = form.elements.number.value;
-
-    const newContact = { id: contactId, name: newName, number };
-    const isUnique = !this.state.contacts.find(({ name }) => name === newName);
-
-    if (isUnique) {
-      this.setState({ contacts: [...this.state.contacts, { ...newContact }] });
-    } else {
-      alert(`${newName} is already in contacts`);
+    const searchUnique = contact.name.toLowerCase();
+    if (contacts.find(({ name }) => name.toLowerCase() === searchUnique)) {
+      Notify.failure(`${contact.name} is already in contacts`);
+      return;
     }
 
-    form.reset();
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, contact],
+    }));
   };
 
-  handleClickDelete = e => {
-    console.log(1);
+  handleClickDelete = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
   };
 
   handleFilter = e => {
@@ -57,7 +53,7 @@ export default class App extends Component {
     return (
       <div>
         <Section title="Phonebook">
-          <ContactForm handleSubmit={this.handleSubmit} />
+        <ContactForm onAddContact={this.onAddContact} />
         </Section>
 
         <Section title="Contacts">
