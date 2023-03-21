@@ -2,7 +2,7 @@ import { Component } from 'react';
 import Section from './Section/Section';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
-//import Filter from './Filter/Filter';
+import Filter from './Filter/Filter';
 
 import { nanoid } from 'nanoid';
 
@@ -45,11 +45,9 @@ export default class App extends Component {
     const { contacts, filter } = this.state;
     let renderContacts = contacts;
 
-    if (filter) {
-      renderContacts = contacts.filter(({ name }) =>
-        name.toLowerCase().includes(filter)
-      );
-    }
+    renderContacts = contacts.filter(({ name }) =>
+    name.toLowerCase().includes(filter.trim())
+  );
 
     return (
       <div>
@@ -58,16 +56,7 @@ export default class App extends Component {
         </Section>
 
         <Section title="Contacts">
-          <label>
-            Find contacts by name
-            <input
-              onChange={this.handleFilter}
-              type="text"
-              name="filter"
-              title="Find contacts by name"
-            />
-          </label>
-          {/* <Filter onChange={this.handleFilter} /> */}
+        <Filter handleFilter={this.handleFilter} />
           <ContactList contacts={renderContacts} />
         </Section>
       </div>
