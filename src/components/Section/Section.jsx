@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Section extends Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+    ]).isRequired,
+  };
   render() {
     return (
       <div>
@@ -12,7 +19,3 @@ export default class Section extends Component {
   }
 }
 
-Section.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-};
