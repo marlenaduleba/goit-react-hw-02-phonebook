@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class ContactForm extends Component {
   render() {
     return (
-      <form action="" >
+      <form action="" onSubmit={this.props.handleSubmit}>
         <label >
           Name
           <input
