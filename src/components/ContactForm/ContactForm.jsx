@@ -4,7 +4,7 @@ export default class ContactForm extends Component {
   render() {
     return (
       <form action="" onSubmit={this.props.handleSubmit}>
-        <label >
+        <label>
           Name
           <input
             type="text"
