@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ContactItem from 'components/ContactItem/ContactItem';
 import PropTypes from 'prop-types';
 
+import css from './ContactList.module.css';
+
 export default class ContactList extends Component {
   static propTypes = {
     contacts: PropTypes.arrayOf(
@@ -16,7 +18,7 @@ export default class ContactList extends Component {
     return (
       <div>
        {this.props.contacts.length > 0 && (
-          <ul>
+          <ul className={css.list}>
              {this.props.contacts.map(({ id, name, number }) => (
               <ContactItem
                 key={id}
