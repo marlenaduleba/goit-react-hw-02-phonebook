@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Section from 'components/Section/Section';
 import Filter from 'components/Filter/Filter';
-import ContactForm from 'components/ContactForm/ContactForm';
+import { ContactForm } from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 
 import css from './Phonebook.module.css';
@@ -48,17 +48,17 @@ export default class Phonebook extends Component {
     let renderContacts = contacts;
 
     renderContacts = contacts.filter(({ name }) =>
-    name.toLowerCase().includes(filter.trim())
-  );
+      name.toLowerCase().includes(filter.trim())
+    );
 
     return (
       <div className={css.box}>
         <Section title="Phonebook">
-        <ContactForm onAddContact={this.onAddContact} />
+          <ContactForm onAddContact={this.onAddContact} />
         </Section>
 
         <Section title="Contacts">
-        <Filter handleFilter={this.handleFilter} />
+          <Filter handleFilter={this.handleFilter} />
           <ContactList
             contacts={renderContacts}
             handleClickDelete={this.handleClickDelete}
