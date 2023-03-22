@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import css from './Filter.module.css';
 
 export default class Filter extends Component {
   static propTypes = {
@@ -8,8 +9,8 @@ export default class Filter extends Component {
 
   render() {
     return (
-      <div>
-        <label>
+      <div >
+        <label className={css.label}>
           Find contacts by name
           <input
             onChange={this.props.handleFilter}
