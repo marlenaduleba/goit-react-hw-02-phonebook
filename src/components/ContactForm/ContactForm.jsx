@@ -4,8 +4,7 @@ import { nanoid } from 'nanoid';
 
 import css from './ContactForm.module.css';
 
-
-export default class ContactForm extends Component {
+export class ContactForm extends Component {
   static propTypes = {
     onAddContact: PropTypes.func.isRequired,
   };
@@ -24,7 +23,6 @@ export default class ContactForm extends Component {
     this.props.onAddContact(newContact);
 
     this.setState({ name: '', number: '' });
-
     e.currentTarget.reset();
   };
 
@@ -32,6 +30,7 @@ export default class ContactForm extends Component {
     const { name, value } = e.currentTarget;
     this.setState({ [name]: value });
   };
+
   render() {
     return (
       <form className={css.form} onSubmit={this.handleFormSubmit}>
@@ -48,18 +47,21 @@ export default class ContactForm extends Component {
           />
         </label>
 
-        <label className={css.label} >
+        <label className={css.label}>
           Number
           <input
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            value={this.state.number}
+            onChange={this.handleInputChange}
             required
           />
         </label>
-
-        <button className={css.btn} type="submit">Add contact</button>
+        <button className={css.btn} type="submit">
+          Add contact
+        </button>
       </form>
     );
   }

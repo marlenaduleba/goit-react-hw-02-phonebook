@@ -13,11 +13,10 @@ export default class Section extends Component {
   };
   render() {
     return (
-        <section>
-          <h2 className={css.title}>{this.props.title}</h2>
-          {this.props.children}
-        </section>
+      <section>
+        <h2 className={css.title}>{this.props.title}</h2>
+        {this.props.children}
+      </section>
     );
   }
 }
-
